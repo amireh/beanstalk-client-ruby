@@ -177,6 +177,28 @@ module Beanstalk
       @watch_list = interact("list-tubes-watched\r\n", :yaml)
     end
 
+    # Kicks #nrJobs buried jobs in currently used tube
+    def kick_jobs(nrJobs)
+      interact("kick #{nrJobs}\r\n", %w(KICKED))
+    end
+
+    # returns a list of all ready jobs
+    def list_jobs_ready()
+      interact("list-jobs-ready\r\n", :yaml)
+    end
+
+    # retrieves a list of all reserved jobs in the 
+    # current used tube 
+    def list_jobs_reserved()
+      interact("list-jobs-reserved\r\n", :yaml)
+    end
+
+    # retrieves a list of all the buried jobs in the 
+    # current used tube
+    def list_jobs_buried()
+      interact("list-jobs-buried\r\n", :yaml);
+    end
+
     private
 
     def interact(cmd, rfmt)
